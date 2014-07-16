@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieWatchlist", "MovieWatchlist\MovieWatchlist.csproj", "{3E630ABF-6893-4A98-8A8C-37FF79989C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImdbParser", "ImdbParser\ImdbParser.csproj", "{D5546977-AFE7-43F6-944B-97208FB45D29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImdbMovieCollector", "ImdbMovieCollector\ImdbMovieCollector.csproj", "{84DDE866-BA15-4E68-B3AE-E3B66418388C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +35,14 @@ Global
 		{3E630ABF-6893-4A98-8A8C-37FF79989C01}.Release|x86.ActiveCfg = Release|x86
 		{3E630ABF-6893-4A98-8A8C-37FF79989C01}.Release|x86.Build.0 = Release|x86
 		{3E630ABF-6893-4A98-8A8C-37FF79989C01}.Release|x86.Deploy.0 = Release|x86
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|ARM.ActiveCfg = Debug|ARM
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|ARM.Build.0 = Debug|ARM
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|x86.ActiveCfg = Debug|x86
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Debug|x86.Build.0 = Debug|x86
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|ARM.ActiveCfg = Release|ARM
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|ARM.Build.0 = Release|ARM
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|x86.ActiveCfg = Release|x86
-		{D5546977-AFE7-43F6-944B-97208FB45D29}.Release|x86.Build.0 = Release|x86
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{84DDE866-BA15-4E68-B3AE-E3B66418388C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
