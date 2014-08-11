@@ -10,6 +10,7 @@ namespace ImdbMovieCollector {
         private const string URI_NOT_VALID = "Not a valid IMDb uri";
         public string ImdbId { get; private set; }
 
+        #region Constructors
         public MovieRetriever(string imdbId) {
             SetId(imdbId);
         }
@@ -29,7 +30,9 @@ namespace ImdbMovieCollector {
             if(imdbId != null) SetId(imdbId);
             else throw new ArgumentException();
         }
+        #endregion
 
+        #region Init helpers
         private void SetId(string imdbId) {
             if(CheckIdValidity(imdbId)) {
                 this.ImdbId = imdbId;
@@ -47,5 +50,6 @@ namespace ImdbMovieCollector {
         private string ParseImdbUri(Uri imdbUri) {
             //TODO: convert uri to string and call ParseImdbUriString
         }
+        #endregion
     }
 }
