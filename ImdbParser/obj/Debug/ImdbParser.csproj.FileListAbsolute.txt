@@ -1,0 +1,1 @@
+C:\Dev\MovieWatchlist\ImdbParser\obj\Debug\ImdbParser.csprojResolveAssemblyReference.cache
