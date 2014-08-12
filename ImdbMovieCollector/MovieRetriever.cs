@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Windows.Web.Http;
+using Windows.Data.Html;
+using HtmlAgilityPack;
 
 namespace ImdbMovieCollector {
     public class MovieRetriever {
@@ -13,7 +15,8 @@ namespace ImdbMovieCollector {
         private const string ID_NOT_VALID = "Not a valdi IMDb ID";
         private const string IMDB_ID_REGEX = @"\btt\d+\b";
 
-        private string pageHtml;
+        private HtmlDocument moviePage;
+        private HtmlNode overviewTop;
 
         public string ImdbId { get; private set; }
         public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
@@ -64,7 +67,44 @@ namespace ImdbMovieCollector {
         #endregion
 
         private async Task GetMoviePageHtml() {
-            pageHtml = await new HttpClient().GetStringAsync(ImdbUri);
+            moviePage = new HtmlDocument();
+            moviePage.LoadHtml(await new HttpClient().GetStringAsync(ImdbUri));
+        }
+
+        private HtmlNode GetMovieOverview() {
+            if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview-top");
+            return overviewTop;
+        }
+
+        private string GetTitle() {
+            string title = "";
+            try {
+                var ot = GetMovieOverview();
+                var headerNode = ot.Descendants("h1").Single();
+                title = headerNode.Descendants("span").First().InnerText;
+            } catch(Exception) {}
+            return title;
+        }
+
+        private int GetReleaseYear() {
+            int releaseYear = 0;
+            try {
+                var ot = GetMovieOverview();
+                var headerNode = ot.Descendants("h1").Single();
+                var yearNode = headerNode.Descendants("a").Single();
+                releaseYear int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
+            } catch(Exception) {}
+            return releaseYear;
+        }
+
+        private List<string> GetContentRatings() {
+            var list = new List<string>();
+            try {
+                var ot = GetMovieOverview();
+                var ratings = ot.Descendants().Where(n => n.GetAttributeValue("itemprop", "") == "contentRating");
+                list = (List<string>)ratings.Select(n => n.Attributes["content"].Value);
+            } catch(Exception) {}
+            return list;
         }
 
         public async Task Test() {

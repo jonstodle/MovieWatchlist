@@ -45,17 +45,12 @@ namespace ImdbMovieCollector {
             }
         }
 
-        private Dictionary<string, string> _contentRatings;
-        public Dictionary<string, string> ContentRatings {
+        private List<string> _contentRatings;
+        public List<string> ContentRatings {
             get { return _contentRatings; }
-
-            set {
-                if(value != _contentRatings) {
-                    _contentRatings = value;
-                    OnPropertyChanged("ContentRatings");
-                }
-            }
+            set { _contentRatings = value; }
         }
+
 
         private int _duration;
         public int Duration {
