@@ -81,17 +81,17 @@ namespace ImdbMovieCollector {
             }
         }
 
-        private DateLocation _born;
-        public DateLocation Born {
-            get { return _born; }
+        //private DateLocation _born;
+        //public DateLocation Born {
+        //    get { return _born; }
 
-            set {
-                if(value != _born) {
-                    _born = value;
-                    OnPropertyChanged("Born");
-                }
-            }
-        }
+        //    set {
+        //        if(value != _born) {
+        //            _born = value;
+        //            OnPropertyChanged("Born");
+        //        }
+        //    }
+        //}
 
         private void OnPropertyChanged(string propertyName) {
             if(PropertyChanged != null) {

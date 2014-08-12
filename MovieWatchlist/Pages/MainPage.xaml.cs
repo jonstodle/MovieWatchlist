@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ImdbMovieCollector;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -98,5 +99,11 @@ namespace MovieWatchlist.Pages {
         }
 
         #endregion
+
+        private async void Button_Click(object sender, RoutedEventArgs e) {
+            var mr = new MovieRetriever(new Uri("http://www.imdb.com/title/tt0076759/?ref_=nv_mv_dflt_1"));
+            await mr.Test();
+            System.Diagnostics.Debug.WriteLine(mr.Html);
+        }
     }
 }

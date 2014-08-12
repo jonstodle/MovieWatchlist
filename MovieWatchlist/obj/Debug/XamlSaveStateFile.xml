@@ -1,5 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\dev\moviewatchlist\moviewatchlist\obj\debug\intermediatexaml\moviewatchlist.exe" HashGuid="62a112e0-6cf9-60e0-5b55-9d1a5f44d44b" />
+    <LocalAssembly PathName="c:\dev\moviewatchlist\moviewatchlist\obj\debug\intermediatexaml\moviewatchlist.exe" HashGuid="3d3d6787-275a-e38e-11a4-48903eeec274" />
+    <ReferenceAssembly PathName="c:\dev\moviewatchlist\imdbmoviecollector\bin\debug\imdbmoviecollector.dll" HashGuid="ea3d8c5e-4dc8-1a6c-5ce8-b62dee7cd6f3" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

@@ -1,61 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>JON-SURFACEPRO</Machine>
+    <Machine>JON-GAMING</Machine>
     <WindowsUser>Jon</WindowsUser>
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
     <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
     <PackageArchitecture>neutral</PackageArchitecture>
     <PackageIdentityName>bf217c87-a735-444d-8c13-240e549a56da</PackageIdentityName>
-    <IntermediateOutputPath>C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Dev\moviewatchlist\MovieWatchlist\obj\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.exe">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.exe">
       <PackagePath>MovieWatchlist.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\Logo.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\ImdbMovieCollector\bin\Debug\ImdbMovieCollector.dll">
+      <PackagePath>ImdbMovieCollector.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\SmallLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\SplashScreen.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\SplashScreen.scale-240.png">
       <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\Square71x71Logo.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\Square71x71Logo.scale-240.png">
       <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\StoreLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\StoreLogo.scale-240.png">
       <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\Assets\WideLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\Assets\WideLogo.scale-240.png">
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MainPage.xbf">
-      <PackagePath>MainPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\Pages\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\Pages\MainPage.xbf">
       <PackagePath>Pages\MainPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.xr.xml">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.xr.xml">
       <PackagePath>MovieWatchlist.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

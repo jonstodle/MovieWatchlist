@@ -1,5 +1,4 @@
 C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\App.xbf
-C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MainPage.xbf
 C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\Pages\MainPage.xbf
 C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.xr.xml
 C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.exe
@@ -9,15 +8,11 @@ C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\AppxManifest.xml
 C:\Dev\MovieWatchlist\MovieWatchlist\bin\Debug\MovieWatchlist.build.appxrecipe
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\App.g.i.cs
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\App.g.cs
-C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\MainPage.g.i.cs
-C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\MainPage.g.cs
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\Pages\MainPage.g.i.cs
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\Pages\MainPage.g.cs
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\XamlTypeInfo.g.cs
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\App.xaml
-C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\MainPage.xaml
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\App.xbf
-C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\MainPage.xbf
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\XamlSaveStateFile.xml
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\Pages\MainPage.xaml
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\Pages\MainPage.xbf
@@ -35,3 +30,8 @@ C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\qualifiers.txt
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\qualifiers.txt.intermediate
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Dev\MovieWatchlist\MovieWatchlist\obj\Debug\ProjectArchitectures.txt
+C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\ImdbMovieCollector.dll
+C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\ImdbMovieCollector.pdb
+C:\Dev\moviewatchlist\MovieWatchlist\bin\Debug\ImdbMovieCollector.pri
+C:\Dev\moviewatchlist\MovieWatchlist\obj\Debug\MovieWatchlist.csprojResolveAssemblyReference.cache
+C:\Dev\moviewatchlist\MovieWatchlist\obj\Debug\MovieWatchlist.csproj.GenerateResource.Cache

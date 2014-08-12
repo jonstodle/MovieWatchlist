@@ -4,26 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Windows.Web.Http;
 
 namespace ImdbMovieCollector {
     public class MovieRetriever {
+        private const string IMDB_BASE_URI = "http://www.imdb.com/title/";
         private const string URI_NOT_VALID = "Not a valid IMDb uri";
         private const string ID_NOT_VALID = "Not a valdi IMDb ID";
         private const string IMDB_ID_REGEX = @"\btt\d+\b";
+
+        private string pageHtml;
+
         public string ImdbId { get; private set; }
+        public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
 
         #region Constructors
         public MovieRetriever(string imdbId) {
             SetId(imdbId);
         }
 
-        public MovieRetriever(string imdbUri) {
-            if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
-            string imdbId = null;
-            imdbId = ParseImdbUriString(imdbUri);
-            if(imdbId != null) SetId(imdbId);
-            else throw new ArgumentException();
-        }
+        //public MovieRetriever(string imdbUri) {
+        //    if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
+        //    string imdbId = null;
+        //    imdbId = ParseImdbUriString(imdbUri);
+        //    if(imdbId != null) SetId(imdbId);
+        //    else throw new ArgumentException();
+        //}
 
         public MovieRetriever(Uri imdbUri) {
             if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
@@ -57,6 +63,13 @@ namespace ImdbMovieCollector {
         }
         #endregion
 
+        private async Task GetMoviePageHtml() {
+            pageHtml = await new HttpClient().GetStringAsync(ImdbUri);
+        }
 
+        public async Task Test() {
+            await GetMoviePageHtml();
+        }
+        public string Html { get { return pageHtml; } }
     }
 }

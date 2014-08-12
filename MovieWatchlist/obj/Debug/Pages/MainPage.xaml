@@ -15,6 +15,35 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
+        
+        <Grid.Resources>
+            <DataTemplate x:Key="ListTemplate">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="20,0,0,0"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image/>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Title"/>
+                        <StackPanel Orientation="Horizontal">
+                            
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="GridTemplate">
+                <Grid Margin="10,10,0,0">
+                    <Image/>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,7 +55,8 @@
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <ListView Name="MovieList">
-                
+                <Button x:ConnectionId='1' Content="Button"                     />
+
             </ListView>
         </Grid>
     </Grid>

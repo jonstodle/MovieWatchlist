@@ -1,1 +1,2 @@
-C:\Dev\MovieWatchlist\MovieWatchlist\MovieWatchlist.csproj;neutral
+C:\Dev\moviewatchlist\ImdbMovieCollector\ImdbMovieCollector.csproj;neutral
+C:\Dev\moviewatchlist\MovieWatchlist\MovieWatchlist.csproj;neutral
