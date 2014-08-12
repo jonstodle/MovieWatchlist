@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 namespace ImdbMovieCollector {
     public class MovieRetriever {
         private const string URI_NOT_VALID = "Not a valid IMDb uri";
+        private const string ID_NOT_VALID = "Not a valdi IMDb ID";
+        private const string IMDB_ID_REGEX = @"\btt\d+\b";
         public string ImdbId { get; private set; }
 
         #region Constructors
@@ -32,6 +34,7 @@ namespace ImdbMovieCollector {
         }
         #endregion
 
+
         #region Init helpers
         private void SetId(string imdbId) {
             if(CheckIdValidity(imdbId)) {
@@ -40,16 +43,20 @@ namespace ImdbMovieCollector {
         }
 
         private bool CheckIdValidity(string imdbId){
-            return imdbId.Contains("imdb.com") && Regex.IsMatch(imdbId, @"tt\d+");
+            return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
         }
 
         private string ParseImdbUriString(string imdbUri) {
-            //TODO: Parse uri string for imdb id
+            var match = Regex.Match(imdbUri, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
+            if(match.Success) return match.Value;
+            else throw new ArgumentException(ID_NOT_VALID);
         }
 
         private string ParseImdbUri(Uri imdbUri) {
-            //TODO: convert uri to string and call ParseImdbUriString
+            return ParseImdbUriString(imdbUri.ToString());
         }
         #endregion
+
+
     }
 }
