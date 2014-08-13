@@ -51,7 +51,6 @@ namespace ImdbMovieCollector {
             set { _contentRatings = value; }
         }
 
-
         private int _duration;
         public int Duration {
             get { return _duration; }

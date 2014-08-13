@@ -92,19 +92,58 @@ namespace ImdbMovieCollector {
                 var ot = GetMovieOverview();
                 var headerNode = ot.Descendants("h1").Single();
                 var yearNode = headerNode.Descendants("a").Single();
-                releaseYear int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
+                releaseYear = int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
             } catch(Exception) {}
             return releaseYear;
         }
 
         private List<string> GetContentRatings() {
-            var list = new List<string>();
+            List<string> contentRatings = new List<string>();
             try {
                 var ot = GetMovieOverview();
                 var ratings = ot.Descendants().Where(n => n.GetAttributeValue("itemprop", "") == "contentRating");
-                list = (List<string>)ratings.Select(n => n.Attributes["content"].Value);
+                contentRatings = (List<string>)ratings.Select(n => n.Attributes["content"].Value);
             } catch(Exception) {}
-            return list;
+            return contentRatings;
+        }
+
+        private int GetDuration() {
+            int duration = 0;
+            try {
+                var ot = GetMovieOverview();
+                var timeElement = ot.Descendants("time").Single();
+                var teText = timeElement.InnerText;
+                duration = int.Parse(Regex.Match(teText, @"\b\d+\b").Value);
+            } catch(Exception) {}
+            return duration;
+        }
+
+        private List<string> GetGenres() {
+            List<string> genres = new List<string>();
+            try {
+                var ot = GetMovieOverview();
+                var infoBar = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "") == "infobar").Single();
+                var genreNodes = infoBar.Descendants("span").Where(n => n.GetAttributeValue("itemprop", "") == "genre");
+                genres = (List<string>)genreNodes.Select(n => n.InnerText);
+            } catch(Exception) {}
+            return genres;
+        }
+
+        private List<DateLocation> GetReleaseDates() {
+            List<DateLocation> releaseDates = new List<DateLocation>();
+            try {
+                //TODO: implement DateLocation properly
+            } catch(Exception) {}
+            return releaseDates;
+        }
+
+        private Dictionary<string, int> GetRatingScores() {
+            Dictionary<string, int> ratingScores = new Dictionary<string, int>();
+            try {
+                var ot = GetMovieOverview();
+
+            } catch(Exception) {}
+            return ratingScores;
         }
 
         public async Task Test() {
