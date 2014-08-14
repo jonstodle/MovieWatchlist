@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImdbMovieCollector {
+namespace ImdbInterface {
     public class Person : INotifyPropertyChanged{
         public event PropertyChangedEventHandler PropertyChanged;
 

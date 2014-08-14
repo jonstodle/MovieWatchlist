@@ -3,20 +3,99 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
-namespace ImdbMovieCollector {
+namespace ImdbInterface {
     public class Movie : INotifyPropertyChanged {
+        private const string IMDB_BASE_URI = "http://www.imdb.com/title/";
+        private const string URI_NOT_VALID = "Not a valid IMDb uri";
+        private const string ID_NOT_VALID = "Not a valdi IMDb ID";
+        private const string IMDB_ID_REGEX = @"\btt\d+\b";
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Constructors
+        public Movie() { }
+
+        public Movie(string imdbId) {
+            ImdbId = imdbId;
+        }
+
+        public Movie(Uri imdbUri) {
+            if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
+            string imdbId = null;
+            imdbId = ParseImdbUri(imdbUri);
+            if(imdbId != null) ImdbId = imdbId;
+            else throw new ArgumentException();
+        }
+
+        #region Init helpers
+        private bool CheckIdValidity(string imdbId) {
+            return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
+        }
+
+        private string ParseImdbUriString(string imdbUri) {
+            var match = Regex.Match(imdbUri, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
+            if(match.Success) return match.Value;
+            else throw new ArgumentException(ID_NOT_VALID);
+        }
+
+        private string ParseImdbUri(Uri imdbUri) {
+            return ParseImdbUriString(imdbUri.ToString());
+        }
+        #endregion
+        #endregion
+
+        #region Properties
         private string _imdbId;
         public string ImdbId {
             get { return _imdbId; }
 
             set {
-                if(value != _imdbId) {
-                    _imdbId = value;
-                    OnPropertyChanged("ImdbId");
+                if(CheckIdValidity(value)) {
+                    if(value != _imdbId) {
+                        _imdbId = value;
+                        OnPropertyChanged("ImdbId");
+                    }
+                } else throw new ArgumentException(URI_NOT_VALID);
+            }
+        }
+
+        public Uri WebUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
+
+        private DateTime _lastFetch;
+        public DateTime LastFetch {
+            get { return _lastFetch; }
+
+            set {
+                if(value != _lastFetch) {
+                    _lastFetch = value;
+                    OnPropertyChanged("LastFetch");
+                }
+            }
+        }
+
+        private Uri _posterThumbnailUri;
+        public Uri PosterThumbnailUri {
+            get { return _posterThumbnailUri; }
+
+            set {
+                if(value != _posterThumbnailUri) {
+                    _posterThumbnailUri = value;
+                    OnPropertyChanged("PosterThumbnailUri");
+                }
+            }
+        }
+
+        private BitmapImage _poster;
+        public BitmapImage Poster {
+            get { return _poster; }
+
+            set {
+                if(value != _poster) {
+                    _poster = value;
+                    OnPropertyChanged("Poster");
                 }
             }
         }
@@ -76,7 +155,7 @@ namespace ImdbMovieCollector {
         }
 
         private List<DateLocation> _releaseDates;
-        public List<DateLocation> ReleaseDAtes {
+        public List<DateLocation> ReleaseDates {
             get { return _releaseDates; }
 
             set {
@@ -169,6 +248,54 @@ namespace ImdbMovieCollector {
                     OnPropertyChanged("Cast");
                 }
             }
+        }
+
+        public bool HasOnlyNonDefaultValues {
+            get {
+                int defaultValuesCount = 0;
+                if(string.IsNullOrWhiteSpace(ImdbId)) defaultValuesCount++;
+                if(WebUri == null) defaultValuesCount++;
+                if(LastFetch == null) defaultValuesCount++;
+                if(PosterThumbnailUri == null) defaultValuesCount++;
+                if(Poster == null) defaultValuesCount++;
+                if(string.IsNullOrWhiteSpace(Title)) defaultValuesCount++;
+                if(ReleaseYear == 0) defaultValuesCount++;
+                if(ContentRatings == null) defaultValuesCount++;
+                if(Duration == 0) defaultValuesCount++;
+                if(Genres == null) defaultValuesCount++;
+                if(ReleaseDates == null) defaultValuesCount++;
+                if(RatingScores == null) defaultValuesCount++;
+                if(string.IsNullOrWhiteSpace(Description)) defaultValuesCount++;
+                if(Directors == null) defaultValuesCount++;
+                if(Writers == null) defaultValuesCount++;
+                if(Stars == null) defaultValuesCount++;
+                if(AlsoLiked == null) defaultValuesCount++;
+                if(Cast == null) defaultValuesCount++;
+                return defaultValuesCount == 0;
+            }
+        }
+
+        private bool _hasFetchedAllData;
+        public bool HasFetchedAllData {
+            get { return _hasFetchedAllData; }
+
+            set {
+                if(value != _hasFetchedAllData) {
+                    _hasFetchedAllData = value;
+                    OnPropertyChanged("HasFetchedAllData");
+                }
+            }
+        }
+        #endregion
+
+        public void FetchAllData() {
+            //TODO: Populate object
+            HasFetchedAllData = true;
+            LastFetch = DateTime.UtcNow;
+        }
+
+        public void Refresh() {
+            FetchAllData();
         }
 
         private void OnPropertyChanged(string propertyName) {

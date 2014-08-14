@@ -8,7 +8,7 @@
     <ProjectGuid>{84DDE866-BA15-4E68-B3AE-E3B66418388C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImdbMovieCollector</RootNamespace>
+    <RootNamespace>ImdbInterface</RootNamespace>
     <AssemblyName>ImdbMovieCollector</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>

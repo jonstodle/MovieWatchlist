@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImdbMovieCollector {
+namespace ImdbInterface {
     public struct DateLocation {
         private readonly DateTime date;
         private readonly string location;

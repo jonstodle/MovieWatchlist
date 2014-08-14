@@ -80,9 +80,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\ImdbMovieCollector\ImdbMovieCollector.csproj">
+    <ProjectReference Include="..\ImdbMovieCollector\ImdbInterface.csproj">
       <Project>{84dde866-ba15-4e68-b3ae-e3b66418388c}</Project>
-      <Name>ImdbMovieCollector</Name>
+      <Name>ImdbInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

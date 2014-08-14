@@ -8,8 +8,8 @@ using Windows.Web.Http;
 using Windows.Data.Html;
 using HtmlAgilityPack;
 
-namespace ImdbMovieCollector {
-    public class MovieRetriever {
+namespace ImdbInterface {
+    public class MovieDetailsRetriever {
         private const string IMDB_BASE_URI = "http://www.imdb.com/title/";
         private const string URI_NOT_VALID = "Not a valid IMDb uri";
         private const string ID_NOT_VALID = "Not a valdi IMDb ID";
@@ -19,57 +19,28 @@ namespace ImdbMovieCollector {
         private HtmlNode overviewTop;
         private HtmlNode titleRecommendations;
 
-        public string ImdbId { get; private set; }
-        public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
+        public Movie OriginMovie { get; private set; }
+        public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + OriginMovie.ImdbId); } }
 
         #region Constructors
-        public MovieRetriever(string imdbId) {
-            SetId(imdbId);
-        }
-
-        //public MovieRetriever(string imdbUri) {
-        //    if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
-        //    string imdbId = null;
-        //    imdbId = ParseImdbUriString(imdbUri);
-        //    if(imdbId != null) SetId(imdbId);
-        //    else throw new ArgumentException();
-        //}
-
-        public MovieRetriever(Uri imdbUri) {
-            if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
-            string imdbId = null;
-            imdbId = ParseImdbUri(imdbUri);
-            if(imdbId != null) SetId(imdbId);
-            else throw new ArgumentException();
+        public MovieDetailsRetriever(Movie movie) {
+            if(movie == null) throw new ArgumentNullException();
+            if(string.IsNullOrWhiteSpace(movie.ImdbId)) throw new ArgumentException(ID_NOT_VALID);
+            OriginMovie = movie;
         }
         #endregion
 
-
-        #region Init helpers
-        private void SetId(string imdbId) {
-            if(CheckIdValidity(imdbId)) {
-                this.ImdbId = imdbId;
-            } else throw new ArgumentException(URI_NOT_VALID);
+        public async Task FetchMovieDetails() {
+            await GetMoviePageHtml();
         }
-
-        private bool CheckIdValidity(string imdbId){
-            return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
-        }
-
-        private string ParseImdbUriString(string imdbUri) {
-            var match = Regex.Match(imdbUri, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
-            if(match.Success) return match.Value;
-            else throw new ArgumentException(ID_NOT_VALID);
-        }
-
-        private string ParseImdbUri(Uri imdbUri) {
-            return ParseImdbUriString(imdbUri.ToString());
-        }
-        #endregion
 
         private async Task GetMoviePageHtml() {
             moviePage = new HtmlDocument();
-            moviePage.LoadHtml(await new HttpClient().GetStringAsync(ImdbUri));
+            try {
+                moviePage.LoadHtml(await new HttpClient().GetStringAsync(ImdbUri));
+            } catch(Exception) {
+                throw new ArgumentException(ID_NOT_VALID);
+            }
         }
 
         #region Movie Overview
@@ -78,28 +49,28 @@ namespace ImdbMovieCollector {
             return overviewTop;
         }
 
-        private string GetTitle() {
+        public void SetTitle() {
             string title = "";
             try {
                 var ot = GetMovieOverview();
                 var headerNode = ot.Descendants("h1").First();
                 title = headerNode.Descendants("span").First().InnerText;
-            } catch(Exception) {}
-            return title;
+            } catch(Exception) { return; }
+            OriginMovie.Title = title;
         }
 
-        private int GetReleaseYear() {
+        public void SetReleaseYear() {
             int releaseYear = 0;
             try {
                 var ot = GetMovieOverview();
                 var headerNode = ot.Descendants("h1").First();
                 var yearNode = headerNode.Descendants("a").First();
                 releaseYear = int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
-            } catch(Exception) {}
-            return releaseYear;
+            } catch(Exception) { return; }
+            OriginMovie.ReleaseYear = releaseYear;
         }
 
-        private List<string> GetContentRatings() {
+        public List<string> GetContentRatings() {
             List<string> contentRatings = new List<string>();
             try {
                 var ot = GetMovieOverview();
@@ -109,7 +80,7 @@ namespace ImdbMovieCollector {
             return contentRatings;
         }
 
-        private int GetDuration() {
+        public int GetDuration() {
             int duration = 0;
             try {
                 var ot = GetMovieOverview();
@@ -120,7 +91,7 @@ namespace ImdbMovieCollector {
             return duration;
         }
 
-        private List<string> GetGenres() {
+        public List<string> GetGenres() {
             List<string> genres = new List<string>();
             try {
                 var ot = GetMovieOverview();
@@ -131,7 +102,7 @@ namespace ImdbMovieCollector {
             return genres;
         }
 
-        private List<DateLocation> GetReleaseDates() {
+        public List<DateLocation> GetReleaseDates() {
             List<DateLocation> releaseDates = new List<DateLocation>();
             try {
                 //TODO: implement DateLocation properly
@@ -139,7 +110,7 @@ namespace ImdbMovieCollector {
             return releaseDates;
         }
 
-        private Dictionary<string, int> GetRatingScores() {
+        public Dictionary<string, int> GetRatingScores() {
             Dictionary<string, int> ratingScores = new Dictionary<string, int>();
             try {
                 //TODO: implement RatingScore struct
@@ -147,7 +118,7 @@ namespace ImdbMovieCollector {
             return ratingScores;
         }
 
-        private string GetDescription() {
+        public string GetDescription() {
             string description = "";
             try {
                 var ot = GetMovieOverview();
@@ -190,7 +161,7 @@ namespace ImdbMovieCollector {
         */
         #endregion
 
-        private HtmlNode GetTitleRecommendations() {
+        public HtmlNode GetTitleRecommendations() {
             if(titleRecommendations == null) titleRecommendations = moviePage.GetElementbyId("titleRecs");
             return titleRecommendations;
         }
