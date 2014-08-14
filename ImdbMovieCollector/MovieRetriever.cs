@@ -17,6 +17,7 @@ namespace ImdbMovieCollector {
 
         private HtmlDocument moviePage;
         private HtmlNode overviewTop;
+        private HtmlNode titleRecommendations;
 
         public string ImdbId { get; private set; }
         public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
@@ -71,6 +72,7 @@ namespace ImdbMovieCollector {
             moviePage.LoadHtml(await new HttpClient().GetStringAsync(ImdbUri));
         }
 
+        #region Movie Overview
         private HtmlNode GetMovieOverview() {
             if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview-top");
             return overviewTop;
@@ -80,7 +82,7 @@ namespace ImdbMovieCollector {
             string title = "";
             try {
                 var ot = GetMovieOverview();
-                var headerNode = ot.Descendants("h1").Single();
+                var headerNode = ot.Descendants("h1").First();
                 title = headerNode.Descendants("span").First().InnerText;
             } catch(Exception) {}
             return title;
@@ -90,8 +92,8 @@ namespace ImdbMovieCollector {
             int releaseYear = 0;
             try {
                 var ot = GetMovieOverview();
-                var headerNode = ot.Descendants("h1").Single();
-                var yearNode = headerNode.Descendants("a").Single();
+                var headerNode = ot.Descendants("h1").First();
+                var yearNode = headerNode.Descendants("a").First();
                 releaseYear = int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
             } catch(Exception) {}
             return releaseYear;
@@ -111,7 +113,7 @@ namespace ImdbMovieCollector {
             int duration = 0;
             try {
                 var ot = GetMovieOverview();
-                var timeElement = ot.Descendants("time").Single();
+                var timeElement = ot.Descendants("time").First();
                 var teText = timeElement.InnerText;
                 duration = int.Parse(Regex.Match(teText, @"\b\d+\b").Value);
             } catch(Exception) {}
@@ -122,7 +124,7 @@ namespace ImdbMovieCollector {
             List<string> genres = new List<string>();
             try {
                 var ot = GetMovieOverview();
-                var infoBar = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "") == "infobar").Single();
+                var infoBar = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "") == "infobar").First();
                 var genreNodes = infoBar.Descendants("span").Where(n => n.GetAttributeValue("itemprop", "") == "genre");
                 genres = (List<string>)genreNodes.Select(n => n.InnerText);
             } catch(Exception) {}
@@ -140,10 +142,57 @@ namespace ImdbMovieCollector {
         private Dictionary<string, int> GetRatingScores() {
             Dictionary<string, int> ratingScores = new Dictionary<string, int>();
             try {
-                var ot = GetMovieOverview();
-
+                //TODO: implement RatingScore struct
             } catch(Exception) {}
             return ratingScores;
+        }
+
+        private string GetDescription() {
+            string description = "";
+            try {
+                var ot = GetMovieOverview();
+                var descriptionNode = ot.Descendants("p").Where(n => n.GetAttributeValue("itemprop", "") == "description").First();
+                description = descriptionNode.InnerText;
+            } catch(Exception) {}
+            return description;
+        }
+
+        /* TODO: Redo these to use Person class
+        private List<Person> GetDirectors() {
+            List<Person> directors = new List<Person>();
+            try {
+                var ot = GetMovieOverview();
+                var directorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("director")).First();
+                directors = (List<Person>)directorNode.Descendants("a").Where(n=>n.GetAttributeValue("href","").Contains("name")).Select(n => n.InnerText);
+            } catch(Exception) {}
+            return directors;
+        }
+
+        private List<Person> GetWriters() {
+            List<Person> writers = new List<Person>();
+            try {
+                var ot = GetMovieOverview();
+                var writerNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("creator")).First();
+                writers = (List<Person>)writerNode.Descendants("a").Where(n => n.GetAttributeValue("href", "").Contains("name")).Select(n => n.InnerText);
+            } catch(Exception) {}
+            return writers;
+        }
+
+        private List<Person> GetStars() {
+            List<Person> stars = new List<Person>();
+            try {
+                var ot = GetMovieOverview();
+                var starNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("actor")).First();
+                stars = (List<Person>)starNode.Descendants("a").Where(n => n.GetAttributeValue("href", "").Contains("name")).Select(n => n.InnerText);
+            } catch(Exception) {}
+            return stars;
+        }
+        */
+        #endregion
+
+        private HtmlNode GetTitleRecommendations() {
+            if(titleRecommendations == null) titleRecommendations = moviePage.GetElementbyId("titleRecs");
+            return titleRecommendations;
         }
 
         public async Task Test() {

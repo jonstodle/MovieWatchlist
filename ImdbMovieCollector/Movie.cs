@@ -87,8 +87,8 @@ namespace ImdbMovieCollector {
             }
         }
 
-        private Dictionary<string, int> _ratingScores;
-        public Dictionary<string, int> RatingScores {
+        private Dictionary<string, double> _ratingScores;
+        public Dictionary<string, double> RatingScores {
             get { return _ratingScores; }
 
             set {
@@ -111,13 +111,13 @@ namespace ImdbMovieCollector {
             }
         }
 
-        private Person _director;
-        public Person Director {
-            get { return _director; }
+        private List<Person> _directors;
+        public List<Person> Directors {
+            get { return _directors; }
 
             set {
-                if(value != _director) {
-                    _director = value;
+                if(value != _directors) {
+                    _directors = value;
                     OnPropertyChanged("Director");
                 }
             }
