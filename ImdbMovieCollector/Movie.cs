@@ -19,6 +19,7 @@ namespace ImdbInterface {
         public Movie() { }
 
         public Movie(string imdbId) {
+            if(imdbId == null) throw new ArgumentNullException(URI_NOT_VALID);
             ImdbId = imdbId;
         }
 
@@ -88,9 +89,24 @@ namespace ImdbInterface {
             }
         }
 
+        private Uri _posterUri;
+        public Uri PosterUri {
+            get { return _posterUri; }
+
+            set {
+                if(value != _posterUri) {
+                    _posterUri = value;
+                    OnPropertyChanged("PosterUri");
+                }
+            }
+        }
+
         private BitmapImage _poster;
         public BitmapImage Poster {
-            get { return _poster; }
+            get {
+                //TODO: Implement check for local file
+                return _poster; 
+            }
 
             set {
                 if(value != _poster) {
@@ -154,13 +170,13 @@ namespace ImdbInterface {
             }
         }
 
-        private List<DateLocation> _releaseDates;
-        public List<DateLocation> ReleaseDates {
-            get { return _releaseDates; }
+        private DateTime _releaseDate;
+        public DateTime ReleaseDate {
+            get { return _releaseDate.Date; }
 
             set {
-                if(value != _releaseDates) {
-                    _releaseDates = value;
+                if(value != _releaseDate) {
+                    _releaseDate = value;
                     OnPropertyChanged("ReleaseDAtes");
                 }
             }
@@ -263,7 +279,7 @@ namespace ImdbInterface {
                 if(ContentRatings == null) defaultValuesCount++;
                 if(Duration == 0) defaultValuesCount++;
                 if(Genres == null) defaultValuesCount++;
-                if(ReleaseDates == null) defaultValuesCount++;
+                if(ReleaseDate == null) defaultValuesCount++;
                 if(RatingScores == null) defaultValuesCount++;
                 if(string.IsNullOrWhiteSpace(Description)) defaultValuesCount++;
                 if(Directors == null) defaultValuesCount++;
@@ -290,6 +306,8 @@ namespace ImdbInterface {
 
         public void FetchAllData() {
             //TODO: Populate object
+            var retriever = new MovieDetailsRetriever(this);
+
             HasFetchedAllData = true;
             LastFetch = DateTime.UtcNow;
         }

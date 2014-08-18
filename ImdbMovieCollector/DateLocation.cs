@@ -30,12 +30,12 @@ namespace ImdbInterface {
             return string.Format("{0] ({1})", Date.ToString("d"), Location);
         }
 
-        //public static bool operator ==(DateLocation dl1, DateLocation dl2) {
-        //    return dl1.Location == dl2.Location && dl1.Date == dl2.Date;
-        //}
+        public static bool operator ==(DateLocation dl1, DateLocation dl2) {
+            return dl1.Location == dl2.Location && dl1.Date == dl2.Date;
+        }
 
-        //public static bool operator !=(DateLocation dl1, DateLocation dl2) {
-        //    return dl1.Location != dl2.Location !! dl1.Date != dl2.Date;
-        //}
+        public static bool operator !=(DateLocation dl1, DateLocation dl2) {
+            return dl1.Location != dl2.Location || dl1.Date != dl2.Date;
+        }
     }
 }

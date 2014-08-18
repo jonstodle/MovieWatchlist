@@ -16,8 +16,6 @@ namespace ImdbInterface {
         private const string IMDB_ID_REGEX = @"\btt\d+\b";
 
         private HtmlDocument moviePage;
-        private HtmlNode overviewTop;
-        private HtmlNode titleRecommendations;
 
         public Movie OriginMovie { get; private set; }
         public Uri ImdbUri { get { return new Uri(IMDB_BASE_URI + OriginMovie.ImdbId); } }
@@ -43,13 +41,34 @@ namespace ImdbInterface {
             }
         }
 
+        #region Poster
+        HtmlNode imgPrimary;
+
+        private HtmlNode GetImgPrimary() {
+            if(imgPrimary == null) imgPrimary = moviePage.GetElementbyId("img_primary");
+            return imgPrimary;
+        }
+
+        public Uri GetPosterUri() {
+            Uri posterUri = new Uri("");
+            try {
+                var ip = GetImgPrimary();
+                var uriString = ip.Descendants("img").First().GetAttributeValue("src", "");
+                posterUri = new Uri(uriString);
+            } catch(Exception) {}
+            return posterUri;
+        }
+        #endregion
+
         #region Movie Overview
+        private HtmlNode overviewTop;
+
         private HtmlNode GetMovieOverview() {
             if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview-top");
             return overviewTop;
         }
 
-        public void SetTitle() {
+        public void GetTitle() {
             string title = "";
             try {
                 var ot = GetMovieOverview();
@@ -59,7 +78,7 @@ namespace ImdbInterface {
             OriginMovie.Title = title;
         }
 
-        public void SetReleaseYear() {
+        public void GetReleaseYear() {
             int releaseYear = 0;
             try {
                 var ot = GetMovieOverview();
@@ -102,18 +121,26 @@ namespace ImdbInterface {
             return genres;
         }
 
-        public List<DateLocation> GetReleaseDates() {
-            List<DateLocation> releaseDates = new List<DateLocation>();
+        public DateTime GetReleaseDate() {
+            DateTime releaseDate = new DateTime();
             try {
-                //TODO: implement DateLocation properly
+                var ot = GetMovieOverview();
+                var publishedNodes = ot.Descendants("meta").Where(n => n.GetAttributeValue("itemprop", "").Contains("datePublished"));
+                var dateArray = publishedNodes.First().GetAttributeValue("content", "").Split('-');
+                releaseDate = new DateTime(int.Parse(dateArray[0]), int.Parse(dateArray[1]), int.Parse(dateArray[2]));
             } catch(Exception) {}
-            return releaseDates;
+            return releaseDate;
         }
 
-        public Dictionary<string, int> GetRatingScores() {
-            Dictionary<string, int> ratingScores = new Dictionary<string, int>();
+        public Dictionary<string, double> GetRatingScores() {
+            Dictionary<string, double> ratingScores = new Dictionary<string, double>();
             try {
-                //TODO: implement RatingScore struct
+                var ot = GetMovieOverview();
+                var starBox = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "").Contains("star-box")).First();
+                ratingScores["IMDb"] = double.Parse(starBox.Descendants("span").First().GetAttributeValue("itemprop", ""));
+                var metaScore = starBox.Descendants("a").Where(n => n.GetAttributeValue("title", "").Contains("metacritic")).First().InnerText;
+                var metaScoreArray = metaScore.Split('/');
+                ratingScores["MetaCritic"] = double.Parse(metaScoreArray[0]);
             } catch(Exception) {}
             return ratingScores;
         }
@@ -161,14 +188,13 @@ namespace ImdbInterface {
         */
         #endregion
 
+        #region
+        private HtmlNode titleRecommendations;
+
         public HtmlNode GetTitleRecommendations() {
             if(titleRecommendations == null) titleRecommendations = moviePage.GetElementbyId("titleRecs");
             return titleRecommendations;
         }
-
-        public async Task Test() {
-            await GetMoviePageHtml();
-        }
-        public string Html { get { return pageHtml; } }
+        #endregion
     }
 }
