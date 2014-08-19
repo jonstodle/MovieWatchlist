@@ -101,7 +101,7 @@ namespace MovieWatchlist.Pages {
         #endregion
 
         private async void Button_Click(object sender, RoutedEventArgs e) {
-            var mr = new MovieDetailsRetriever(new Uri("http://www.imdb.com/title/tt0076759/?ref_=nv_mv_dflt_1"));
+            var mr = new MoviePageParser(new Uri("http://www.imdb.com/title/tt0076759/?ref_=nv_mv_dflt_1"));
             await mr.Test();
             System.Diagnostics.Debug.WriteLine(mr.Html);
         }

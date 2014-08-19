@@ -254,8 +254,8 @@ namespace ImdbInterface {
             }
         }
 
-        private List<Person> _cast;
-        public List<Person> Cast {
+        private Dictionary<string, Person> _cast;
+        public Dictionary<string, Person> Cast {
             get { return _cast; }
 
             set {
@@ -306,7 +306,7 @@ namespace ImdbInterface {
 
         public void FetchAllData() {
             //TODO: Populate object
-            var retriever = new MovieDetailsRetriever(this);
+            var retriever = new MoviePageParser(this);
 
             HasFetchedAllData = true;
             LastFetch = DateTime.UtcNow;
