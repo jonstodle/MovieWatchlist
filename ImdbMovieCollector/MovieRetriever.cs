@@ -155,13 +155,16 @@ namespace ImdbInterface {
             return description;
         }
 
-        /* TODO: Redo these to use Person class
         private List<Person> GetDirectors() {
             List<Person> directors = new List<Person>();
             try {
                 var ot = GetMovieOverview();
                 var directorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("director")).First();
-                directors = (List<Person>)directorNode.Descendants("a").Where(n=>n.GetAttributeValue("href","").Contains("name")).Select(n => n.InnerText);
+                foreach(var pn in directorNode.Descendants("a")) {
+                    var personUriString = pn.GetAttributeValue("href", "");
+                    var personName = pn.InnerText;
+                    directors.Add(new Person(new Uri(personUriString)) { Name = personName });
+                }
             } catch(Exception) {}
             return directors;
         }
@@ -170,8 +173,12 @@ namespace ImdbInterface {
             List<Person> writers = new List<Person>();
             try {
                 var ot = GetMovieOverview();
-                var writerNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("creator")).First();
-                writers = (List<Person>)writerNode.Descendants("a").Where(n => n.GetAttributeValue("href", "").Contains("name")).Select(n => n.InnerText);
+                var creatorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("creator")).First();
+                foreach(var pn in creatorNode.Descendants("a")) {
+                    var personUriString = pn.GetAttributeValue("href", "");
+                    var personName = pn.InnerText;
+                    writers.Add(new Person(new Uri(personUriString)) { Name = personName });
+                }
             } catch(Exception) {}
             return writers;
         }
@@ -180,12 +187,15 @@ namespace ImdbInterface {
             List<Person> stars = new List<Person>();
             try {
                 var ot = GetMovieOverview();
-                var starNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("actor")).First();
-                stars = (List<Person>)starNode.Descendants("a").Where(n => n.GetAttributeValue("href", "").Contains("name")).Select(n => n.InnerText);
+                var actorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("actor")).First();
+                foreach(var pn in actorNode.Descendants("a")) {
+                    var personUriString = pn.GetAttributeValue("href", "");
+                    var personName = pn.InnerText;
+                    stars.Add(new Person(new Uri(personUriString)) { Name = personName });
+                }
             } catch(Exception) {}
             return stars;
         }
-        */
         #endregion
 
         #region

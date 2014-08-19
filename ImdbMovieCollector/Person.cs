@@ -9,6 +9,24 @@ namespace ImdbInterface {
     public class Person : INotifyPropertyChanged{
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Constructors
+        public Person() { }
+
+        public Person(string imdbId) {
+            //TODO: Implement constructor
+        }
+
+        public Person(Uri imdbUri) {
+            //TODO: Implement constructor
+        }
+
+        #region Init helpers
+        //TODO: Implement validity check
+        //TODO: Implement string parser
+        //TODO: Implement uri parser
+        #endregion
+        #endregion
+
         private string _name;
         public string Name {
             get { return _name; }
