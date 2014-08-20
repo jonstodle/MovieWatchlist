@@ -25,10 +25,7 @@ namespace ImdbInterface {
 
         public Movie(Uri imdbUri) {
             if(imdbUri == null) throw new ArgumentNullException(URI_NOT_VALID);
-            string imdbId = null;
-            imdbId = ParseImdbUri(imdbUri);
-            if(imdbId != null) ImdbId = imdbId;
-            else throw new ArgumentException();
+            ImdbId = ParseImdbUri(imdbUri);
         }
         #endregion
 
