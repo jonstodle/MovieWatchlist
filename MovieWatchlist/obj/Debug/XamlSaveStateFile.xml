@@ -2,6 +2,5 @@
   <ReferenceAssemblyList>
     <LocalAssembly PathName="c:\dev\moviewatchlist\moviewatchlist\obj\debug\intermediatexaml\moviewatchlist.exe" HashGuid="3d3d6787-275a-e38e-11a4-48903eeec274" />
     <ReferenceAssembly PathName="c:\dev\moviewatchlist\packages\htmlagilitypack-pcl.1.4.6\lib\htmlagilitypack-pcl.dll" HashGuid="1fc2419a-7d33-69bc-b245-362b18550446" />
-    <ReferenceAssembly PathName="c:\dev\moviewatchlist\imdbmoviecollector\bin\debug\imdbmoviecollector.dll" HashGuid="ea3d8c5e-4dc8-1a6c-5ce8-b62dee7cd6f3" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

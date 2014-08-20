@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieWatchlist", "MovieWatchlist\MovieWatchlist.csproj", "{3E630ABF-6893-4A98-8A8C-37FF79989C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImdbInterface", "ImdbMovieCollector\ImdbInterface.csproj", "{84DDE866-BA15-4E68-B3AE-E3B66418388C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImdbInterface", "ImdbInterface\ImdbInterface.csproj", "{84DDE866-BA15-4E68-B3AE-E3B66418388C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
