@@ -30,23 +30,23 @@ namespace ImdbInterface {
             if(imdbId != null) ImdbId = imdbId;
             else throw new ArgumentException();
         }
+        #endregion
 
-        #region Init helpers
-        private bool CheckIdValidity(string imdbId) {
-            return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
-        }
-
-        private string ParseImdbUriString(string imdbUri) {
-            var match = Regex.Match(imdbUri, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
+        #region Parsers
+        private string ParseImdbUriString(string imdbUriString) {
+            var match = Regex.Match(imdbUriString, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
             if(match.Success) return match.Value;
-            else throw new ArgumentException(ID_NOT_VALID);
+            else throw new ArgumentException(URI_NOT_VALID);
         }
 
         private string ParseImdbUri(Uri imdbUri) {
             return ParseImdbUriString(imdbUri.ToString());
         }
         #endregion
-        #endregion
+
+        private bool CheckIdValidity(string imdbId) {
+            return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
+        }
 
         #region Properties
         private string _imdbId;
@@ -59,7 +59,7 @@ namespace ImdbInterface {
                         _imdbId = value;
                         OnPropertyChanged("ImdbId");
                     }
-                } else throw new ArgumentException(URI_NOT_VALID);
+                } else throw new ArgumentException(ID_NOT_VALID);
             }
         }
 
