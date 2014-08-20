@@ -19,7 +19,7 @@ namespace ImdbInterface {
         public Movie() { }
 
         public Movie(string imdbId) {
-            if(imdbId == null) throw new ArgumentNullException(URI_NOT_VALID);
+            if(imdbId == null) throw new ArgumentNullException(ID_NOT_VALID);
             ImdbId = imdbId;
         }
 
