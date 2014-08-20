@@ -34,7 +34,7 @@ namespace ImdbInterface {
             if(match.Success) return match.Value;
             else throw new ArgumentException(URI_NOT_VALID);
         }
-        //TODO: Implement uri parser
+
         private string ParseImdbUri(Uri imdbUri) {
             return ParseImdbUriString(imdbUri.ToString());
         }
