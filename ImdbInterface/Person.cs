@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace ImdbInterface {
     public class Person : INotifyPropertyChanged {
@@ -44,6 +45,7 @@ namespace ImdbInterface {
             return Regex.IsMatch(imdbId, IMDB_ID_REGEX, RegexOptions.IgnoreCase);
         }
 
+        #region Properties
         private string _imdbId;
         public string ImdbId {
             get { return _imdbId; }
@@ -52,6 +54,56 @@ namespace ImdbInterface {
                 if(value != _imdbId) {
                     _imdbId = value;
                     OnPropertyChanged("ImdbId");
+                }
+            }
+        }
+
+        public Uri WebUri { get { return new Uri(IMDB_BASE_URI + ImdbId); } }
+
+        private DateTime _lastFetch;
+        public DateTime LastFetch {
+            get { return _lastFetch; }
+
+            set {
+                if(value != _lastFetch) {
+                    _lastFetch = value;
+                    OnPropertyChanged("LastFetch");
+                }
+            }
+        }
+
+        private Uri _posterThumbnailUri;
+        public Uri PosterThumbnailUri {
+            get { return _posterThumbnailUri; }
+
+            set {
+                if(value != _posterThumbnailUri) {
+                    _posterThumbnailUri = value;
+                    OnPropertyChanged("PosterThumbnailUri");
+                }
+            }
+        }
+
+        private Uri _posterUri;
+        public Uri PosterUri {
+            get { return _posterUri; }
+
+            set {
+                if(value != _posterUri) {
+                    _posterUri = value;
+                    OnPropertyChanged("PosterUri");
+                }
+            }
+        }
+
+        private BitmapImage _poster;
+        public BitmapImage Poster {
+            get { return _poster; }
+
+            set {
+                if(value != _poster) {
+                    _poster = value;
+                    OnPropertyChanged("Poster");
                 }
             }
         }
@@ -70,42 +122,6 @@ namespace ImdbInterface {
             }
         }
 
-        private string _character;
-        public string Character {
-            get { return _character; }
-
-            set {
-                if(value != _character) {
-                    _character = value;
-                    OnPropertyChanged("Character");
-                }
-            }
-        }
-
-        private Uri _portraitUri;
-        public Uri PorttraitUri {
-            get { return _portraitUri; }
-
-            set {
-                if(value != _portraitUri) {
-                    _portraitUri = value;
-                    OnPropertyChanged("PorttraitUri");
-                }
-            }
-        }
-
-        private List<string> _roles;
-        public List<string> Roles {
-            get { return _roles; }
-
-            set {
-                if(value != _roles) {
-                    _roles = value;
-                    OnPropertyChanged("Roles");
-                }
-            }
-        }
-
         private string _description;
         public string Description {
             get { return _description; }
@@ -114,6 +130,54 @@ namespace ImdbInterface {
                 if(value != _description) {
                     _description = value;
                     OnPropertyChanged("Description");
+                }
+            }
+        }
+
+        private DateTime _birthDate;
+        public DateTime BirthDate {
+            get { return _birthDate; }
+
+            set {
+                if(value != _birthDate) {
+                    _birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                }
+            }
+        }
+
+        private string _birthPlace;
+        public string BirthPlace {
+            get { return _birthPlace; }
+
+            set {
+                if(value != _birthPlace) {
+                    _birthPlace = value;
+                    OnPropertyChanged("BirthPlace");
+                }
+            }
+        }
+
+        private List<Movie> _knownFor;
+        public List<Movie> KnownFor {
+            get { return _knownFor; }
+
+            set {
+                if(value != _knownFor) {
+                    _knownFor = value;
+                    OnPropertyChanged("KnownFor");
+                }
+            }
+        }
+
+        private List<object> _filmography;
+        public List<object> Filmography {
+            get { return _filmography; }
+
+            set {
+                if(value != _filmography) {
+                    _filmography = value;
+                    OnPropertyChanged("Filmography");
                 }
             }
         }
