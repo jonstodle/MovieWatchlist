@@ -122,6 +122,18 @@ namespace ImdbInterface {
             }
         }
 
+        private List<string> _jobTitles;
+        public List<string> JobTitles {
+            get { return _jobTitles; }
+
+            set {
+                if(value != _jobTitles) {
+                    _jobTitles = value;
+                    OnPropertyChanged("JobTitles");
+                }
+            }
+        }
+
         private string _description;
         public string Description {
             get { return _description; }
