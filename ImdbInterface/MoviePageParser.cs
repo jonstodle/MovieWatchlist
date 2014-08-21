@@ -64,7 +64,7 @@ namespace ImdbInterface {
         private HtmlNode overviewTop;
 
         private HtmlNode GetOverviewTop() {
-            if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview_top");
+            if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview-top");
             return overviewTop;
         }
 
