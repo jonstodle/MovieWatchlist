@@ -63,15 +63,15 @@ namespace ImdbInterface {
         #region Movie Overview
         private HtmlNode overviewTop;
 
-        private HtmlNode GetMovieOverview() {
-            if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview-top");
+        private HtmlNode GetOverviewTop() {
+            if(overviewTop == null) overviewTop = moviePage.GetElementbyId("overview_top");
             return overviewTop;
         }
 
         public void GetTitle() {
             string title = "";
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var headerNode = ot.Descendants("h1").First();
                 title = headerNode.Descendants("span").First().InnerText;
             } catch(Exception) { return; }
@@ -81,7 +81,7 @@ namespace ImdbInterface {
         public void GetReleaseYear() {
             int releaseYear = 0;
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var headerNode = ot.Descendants("h1").First();
                 var yearNode = headerNode.Descendants("a").First();
                 releaseYear = int.Parse(Regex.Match(yearNode.InnerText, @"\b\d+\b").Value);
@@ -92,7 +92,7 @@ namespace ImdbInterface {
         public List<string> GetContentRatings() {
             List<string> contentRatings = new List<string>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var ratings = ot.Descendants().Where(n => n.GetAttributeValue("itemprop", "") == "contentRating");
                 contentRatings = (List<string>)ratings.Select(n => n.Attributes["content"].Value);
             } catch(Exception) { }
@@ -102,7 +102,7 @@ namespace ImdbInterface {
         public int GetDuration() {
             int duration = 0;
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var timeElement = ot.Descendants("time").First();
                 var teText = timeElement.InnerText;
                 duration = int.Parse(Regex.Match(teText, @"\b\d+\b").Value);
@@ -113,7 +113,7 @@ namespace ImdbInterface {
         public List<string> GetGenres() {
             List<string> genres = new List<string>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var infoBar = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "") == "infobar").First();
                 var genreNodes = infoBar.Descendants("span").Where(n => n.GetAttributeValue("itemprop", "") == "genre");
                 genres = (List<string>)genreNodes.Select(n => n.InnerText);
@@ -124,7 +124,7 @@ namespace ImdbInterface {
         public DateTime GetReleaseDate() {
             DateTime releaseDate = new DateTime();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var publishedNodes = ot.Descendants("meta").Where(n => n.GetAttributeValue("itemprop", "").Contains("datePublished"));
                 var dateArray = publishedNodes.First().GetAttributeValue("content", "").Split('-');
                 releaseDate = new DateTime(int.Parse(dateArray[0]), int.Parse(dateArray[1]), int.Parse(dateArray[2]));
@@ -135,7 +135,7 @@ namespace ImdbInterface {
         public Dictionary<string, double> GetRatingScores() {
             Dictionary<string, double> ratingScores = new Dictionary<string, double>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var starBox = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "").Contains("star-box")).First();
                 ratingScores["IMDb"] = double.Parse(starBox.Descendants("span").First().GetAttributeValue("itemprop", ""));
                 var metaScore = starBox.Descendants("a").Where(n => n.GetAttributeValue("title", "").Contains("metacritic")).First().InnerText;
@@ -148,7 +148,7 @@ namespace ImdbInterface {
         public string GetDescription() {
             string description = "";
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var descriptionNode = ot.Descendants("p").Where(n => n.GetAttributeValue("itemprop", "") == "description").First();
                 description = descriptionNode.InnerText;
             } catch(Exception) { }
@@ -158,7 +158,7 @@ namespace ImdbInterface {
         private List<Person> GetDirectors() {
             List<Person> directors = new List<Person>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var directorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("director")).First();
                 foreach(var pn in directorNode.Descendants("a")) {
                     var personUriString = pn.GetAttributeValue("href", "");
@@ -172,7 +172,7 @@ namespace ImdbInterface {
         private List<Person> GetWriters() {
             List<Person> writers = new List<Person>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var creatorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("creator")).First();
                 foreach(var pn in creatorNode.Descendants("a")) {
                     var personUriString = pn.GetAttributeValue("href", "");
@@ -186,7 +186,7 @@ namespace ImdbInterface {
         private List<Person> GetStars() {
             List<Person> stars = new List<Person>();
             try {
-                var ot = GetMovieOverview();
+                var ot = GetOverviewTop();
                 var actorNode = ot.Descendants("div").Where(n => n.GetAttributeValue("itemprop", "").Contains("actor")).First();
                 foreach(var pn in actorNode.Descendants("a")) {
                     var personUriString = pn.GetAttributeValue("href", "");
