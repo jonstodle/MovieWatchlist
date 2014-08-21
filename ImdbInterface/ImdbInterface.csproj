@@ -42,6 +42,7 @@
     <Compile Include="Movie.cs" />
     <Compile Include="MoviePageParser.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PersonPageParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
