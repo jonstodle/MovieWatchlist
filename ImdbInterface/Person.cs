@@ -181,18 +181,7 @@ namespace ImdbInterface {
                 }
             }
         }
-
-        //private DateLocation _born;
-        //public DateLocation Born {
-        //    get { return _born; }
-
-        //    set {
-        //        if(value != _born) {
-        //            _born = value;
-        //            OnPropertyChanged("Born");
-        //        }
-        //    }
-        //}
+        #endregion
 
         private void OnPropertyChanged(string propertyName) {
             if(PropertyChanged != null) {
