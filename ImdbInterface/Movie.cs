@@ -303,7 +303,7 @@ namespace ImdbInterface {
 
         public void FetchAllData() {
             //TODO: Populate object
-            var retriever = new MoviePageParser(this);
+            var parser = new MoviePageParser(this);
 
             HasFetchedAllData = true;
             LastFetch = DateTime.UtcNow;
