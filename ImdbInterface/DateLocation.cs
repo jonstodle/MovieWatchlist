@@ -27,7 +27,7 @@ namespace ImdbInterface {
         }
 
         public override string ToString() {
-            return string.Format("{0] ({1})", Date.ToString("d"), Location);
+            return string.Format("{0} ({1})", Date.ToString("d"), Location);
         }
 
         public static bool operator ==(DateLocation dl1, DateLocation dl2) {
