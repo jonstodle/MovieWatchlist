@@ -72,18 +72,6 @@ namespace ImdbInterface {
             }
         }
 
-        private Uri _posterThumbnailUri;
-        public Uri PosterThumbnailUri {
-            get { return _posterThumbnailUri; }
-
-            set {
-                if(value != _posterThumbnailUri) {
-                    _posterThumbnailUri = value;
-                    OnPropertyChanged("PosterThumbnailUri");
-                }
-            }
-        }
-
         private Uri _posterUri;
         public Uri PosterUri {
             get { return _posterUri; }
