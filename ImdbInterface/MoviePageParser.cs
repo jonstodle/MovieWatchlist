@@ -224,7 +224,7 @@ namespace ImdbInterface {
                     var imdbId = mn.GetAttributeValue("data-tconst", "");
                     var title = mn.GetAttributeValue("title", "");
                     var thumbnailUriString = mn.Descendants("img").First().GetAttributeValue("loadlate", "");
-                    alsoLiked.Add(new Movie(imdbId) { Title = title, PosterThumbnailUri = new Uri(thumbnailUriString) });
+                    alsoLiked.Add(new Movie(imdbId) { Title = title, PosterUri = new Uri(thumbnailUriString) });
                 }
             } catch(Exception) { }
             return alsoLiked;
@@ -249,7 +249,7 @@ namespace ImdbInterface {
                     var thumbnailUriString = pn.Descendants("img").First().GetAttributeValue("loadlate", "");
                     var name = pn.Descendants("span").Where(n => n.GetAttributeValue("itemprop", "").Contains("name")).First().InnerText;
                     var character = pn.Descendants("td").Where(n => n.GetAttributeValue("class", "").Contains("character")).First().InnerText;
-                    cast.Add(new CastMember(new Person(new Uri(imdbUriString)) { Name = name, PorttraitUri = new Uri(thumbnailUriString) }, character));
+                    cast.Add(new CastMember(new Person(new Uri(imdbUriString)) { Name = name, PosterUri = new Uri(thumbnailUriString) }, character));
                 }
             } catch(Exception) { }
             return cast;
