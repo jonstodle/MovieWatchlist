@@ -239,8 +239,8 @@ namespace ImdbInterface {
             return titleCast;
         }
 
-        public Dictionary<string, Person> GetCast() {
-            Dictionary<string, Person> cast = new Dictionary<string, Person>();
+        public List<CastMember> GetCast() {
+            List<CastMember> cast = new List<CastMember>();
             try {
                 var tc = GetTitleCast();
                 var personNodes = tc.Descendants("tr").Where(n => n.GetAttributeValue("class", false));
@@ -249,7 +249,7 @@ namespace ImdbInterface {
                     var thumbnailUriString = pn.Descendants("img").First().GetAttributeValue("loadlate", "");
                     var name = pn.Descendants("span").Where(n => n.GetAttributeValue("itemprop", "").Contains("name")).First().InnerText;
                     var character = pn.Descendants("td").Where(n => n.GetAttributeValue("class", "").Contains("character")).First().InnerText;
-                    cast[character] = new Person(new Uri(imdbUriString)) { Name = name, PorttraitUri = new Uri(thumbnailUriString) };
+                    cast.Add(new CastMember(new Person(new Uri(imdbUriString)) { Name = name, PorttraitUri = new Uri(thumbnailUriString) }, character));
                 }
             } catch(Exception) { }
             return cast;

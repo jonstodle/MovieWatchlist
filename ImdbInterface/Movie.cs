@@ -251,8 +251,8 @@ namespace ImdbInterface {
             }
         }
 
-        private Dictionary<string, Person> _cast;
-        public Dictionary<string, Person> Cast {
+        private List<CastMember> _cast;
+        public List<CastMember> Cast {
             get { return _cast; }
 
             set {
