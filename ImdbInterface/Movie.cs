@@ -167,14 +167,26 @@ namespace ImdbInterface {
             }
         }
 
-        private Dictionary<string, double> _ratingScores;
-        public Dictionary<string, double> RatingScores {
-            get { return _ratingScores; }
+        private double _imdbScore;
+        public double ImdbScore {
+            get { return _imdbScore; }
 
             set {
-                if(value != _ratingScores) {
-                    _ratingScores = value;
-                    OnPropertyChanged("RatingScores");
+                if(value != _imdbScore) {
+                    _imdbScore = value;
+                    OnPropertyChanged("ImdbScore");
+                }
+            }
+        }
+
+        private int _metacriticScore;
+        public int MetacriticScore {
+            get { return _metacriticScore; }
+
+            set {
+                if(value != _metacriticScore) {
+                    _metacriticScore = value;
+                    OnPropertyChanged("MetacriticScore");
                 }
             }
         }
@@ -257,7 +269,6 @@ namespace ImdbInterface {
                 if(string.IsNullOrWhiteSpace(ImdbId)) defaultValuesCount++;
                 if(WebUri == null) defaultValuesCount++;
                 if(LastFetch == null) defaultValuesCount++;
-                if(PosterThumbnailUri == null) defaultValuesCount++;
                 if(Poster == null) defaultValuesCount++;
                 if(string.IsNullOrWhiteSpace(Title)) defaultValuesCount++;
                 if(ReleaseYear == 0) defaultValuesCount++;
@@ -265,7 +276,8 @@ namespace ImdbInterface {
                 if(Duration == 0) defaultValuesCount++;
                 if(Genres == null) defaultValuesCount++;
                 if(ReleaseDate == null) defaultValuesCount++;
-                if(RatingScores == null) defaultValuesCount++;
+                if(ImdbScore == 0) defaultValuesCount++;
+                if(MetacriticScore == 0) defaultValuesCount++;
                 if(string.IsNullOrWhiteSpace(Description)) defaultValuesCount++;
                 if(Directors == null) defaultValuesCount++;
                 if(Writers == null) defaultValuesCount++;

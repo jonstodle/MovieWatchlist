@@ -132,17 +132,26 @@ namespace ImdbInterface {
             return releaseDate;
         }
 
-        public Dictionary<string, double> GetRatingScores() {
-            Dictionary<string, double> ratingScores = new Dictionary<string, double>();
+        public double GetImdbScore() {
+            double imdbScore = 0;
             try {
                 var ot = GetOverviewTop();
                 var starBox = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "").Contains("star-box")).First();
-                ratingScores["IMDb"] = double.Parse(starBox.Descendants("span").First().GetAttributeValue("itemprop", ""));
+                imdbScore = double.Parse(starBox.Descendants("span").First().GetAttributeValue("itemprop", ""));
+            } catch(Exception) {}
+            return imdbScore;
+        }
+
+        public int GetMetacriticScore() {
+            int metacriticScore = 0;
+            try {
+                var ot = GetOverviewTop();
+                var starBox = ot.Descendants("div").Where(n => n.GetAttributeValue("class", "").Contains("star-box")).First();
                 var metaScore = starBox.Descendants("a").Where(n => n.GetAttributeValue("title", "").Contains("metacritic")).First().InnerText;
                 var metaScoreArray = metaScore.Split('/');
-                ratingScores["MetaCritic"] = double.Parse(metaScoreArray[0]);
-            } catch(Exception) { }
-            return ratingScores;
+                metacriticScore = int.Parse(metaScoreArray.First());
+            } catch(Exception) {}
+            return metacriticScore;
         }
 
         public string GetDescription() {
