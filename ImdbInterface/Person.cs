@@ -183,6 +183,30 @@ namespace ImdbInterface {
         }
         #endregion
 
+        private bool _hasFetchedAllData;
+        public bool HasFetchedAllData {
+            get { return _hasFetchedAllData; }
+
+            set {
+                if(value != _hasFetchedAllData) {
+                    _hasFetchedAllData = value;
+                    OnPropertyChanged("HasFetchedAllData");
+                }
+            }
+        }
+
+        public void FetchAllData() {
+            //TODO: Fetch all person data
+            var parser = new PersonPageParser(this);
+
+            HasFetchedAllData = true;
+            LastFetch = DateTime.UtcNow;
+        }
+
+        public void Refresh() {
+            FetchAllData();
+        }
+
         private void OnPropertyChanged(string propertyName) {
             if(PropertyChanged != null) {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
